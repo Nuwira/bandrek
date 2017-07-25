@@ -3,6 +3,7 @@
 namespace Nuwira\Gembok;
 
 use Illuminate\Auth\Passwords\PasswordResetServiceProvider as ServiceProvider;
+use Nuwira\Gembok\Password\PasswordBrokerManager;
 
 class GembokServiceProvider extends ServiceProvider
 {

@@ -3,6 +3,7 @@
 namespace Nuwira\Gembok\Password;
 
 use Illuminate\Auth\Passwords\DatabaseTokenRepository as BaseDatabaseTokenRepository;
+use Nuwira\Gembok\Gembok;
 
 class DatabaseTokenRepository extends BaseDatabaseTokenRepository
 {
