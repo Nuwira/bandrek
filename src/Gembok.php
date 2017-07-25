@@ -2,7 +2,6 @@
 
 namespace Nuwira\Gembok;
 
-use Carbon\Carbon;
 use Hashids\Hashids;
 
 class Gembok implements GembokContract
@@ -108,9 +107,8 @@ class Gembok implements GembokContract
     {
         if (! is_array($code)) {
             $code = str_split($code);
+            $code = array_values($code);
         }
-
-        array_push($code, Carbon::now()->getTimestamp());
 
         return $this->hashids->encode($code);
     }
@@ -126,8 +124,6 @@ class Gembok implements GembokContract
     public function getCodeFromToken($token, $toString = true)
     {
         $codes = $this->hashids->decode($token);
-        array_pop($codes);
-
         $codes = array_values($codes);
 
         if (! $toString) {

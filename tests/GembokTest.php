@@ -2,7 +2,6 @@
 
 namespace Nuwira\Gembok\Tests;
 
-use Carbon\Carbon;
 use Nuwira\Gembok\Gembok;
 use PHPUnit\Framework\TestCase;
 
@@ -12,16 +11,7 @@ class GembokTest extends TestCase
     {
         parent::setUp();
 
-        Carbon::setTestNow(Carbon::parse('2017-07-25 20:58:39'));
-
         $this->gembok = new Gembok();
-    }
-
-    public function tearDown()
-    {
-        Carbon::setTestNow();
-
-        parent::tearDown();
     }
 
     /**
@@ -76,7 +66,7 @@ class GembokTest extends TestCase
         $codeArray = [1, 2, 3, 4, 5, 6];
         $codeString = '123456';
         $codeInteger = 123456;
-        $token = '0yOg3K1B5bjME6RQ92ZkXVexNfEhxiKs8tLua1Jogzql7xnADLGaYovdm8J4WzpN';
+        $token = 'laOJdM3Z2YG5DjybnlX1mNV7pw4vfJhWi5s0tOr0ozEKBR4xPO8g6QL9WkavA67X';
 
         $this->assertSame($token, $this->gembok->getTokenFromCode($codeArray));
         $this->assertSame($token, $this->gembok->getTokenFromCode($codeString));
@@ -84,7 +74,7 @@ class GembokTest extends TestCase
 
         $codeArray = [0, 9, 8, 7, 6, 5, 4, 3, 2, 1];
         $codeString = '0987654321';
-        $token = 'PQpL50aGV1bBm76AYleb6cGHgF2C4uPtbsVinh0fNjX8kyeJjXD4yOnEzKR3k9ZN';
+        $token = 'ENKVZO4Mx6yPovBQgz7lYqoJcBH3FWCNuKtLsRizhJr3pd0aGm1X8nRbLWJ25Ajk';
 
         $this->assertSame($token, $this->gembok->getTokenFromCode($codeArray));
         $this->assertSame($token, $this->gembok->getTokenFromCode($codeString));
@@ -95,7 +85,7 @@ class GembokTest extends TestCase
      */
     public function testGetCodeFromToken()
     {
-        $token = '0yOg3K1B5bjME6RQ92ZkXVexNfEhxiKs8tLua1Jogzql7xnADLGaYovdm8J4WzpN';
+        $token = 'laOJdM3Z2YG5DjybnlX1mNV7pw4vfJhWi5s0tOr0ozEKBR4xPO8g6QL9WkavA67X';
         $codeArray = [1, 2, 3, 4, 5, 6];
         $codeString = '123456';
 
