@@ -5,7 +5,7 @@ namespace Nuwira\Gembok;
 use Carbon\Carbon;
 use Hashids\Hashids;
 
-class Gembok
+class Gembok implements GembokContract
 {
     /**
      * The length of random code generated
@@ -20,12 +20,22 @@ class Gembok
     /**
      * The length of token string generated
      *
-     * (default value: 40)
+     * (default value: 64)
      *
      * @var int
      * @access protected
      */
-    protected $tokenLength = 40;
+    protected $tokenLength = 64;
+
+    /**
+     * The alphabet for tokens
+     *
+     * (default value: 'qwertyuioplkjhgfdsazxcvbnm0987654321QAZXSWEDCVFRTGBNHYUJMKIOLP')
+     *
+     * @var string
+     * @access protected
+     */
+    protected $alphabet = 'qwertyuioplkjhgfdsazxcvbnm0987654321QAZXSWEDCVFRTGBNHYUJMKIOLP';
 
     /**
      * Create Gembok instance.
@@ -33,48 +43,73 @@ class Gembok
      * @access public
      * @param string $salt          (default: '')
      * @param int    $minHashLength (default: 0)
-     * @param string $alphabet      (default: 'qwertyuioplkjhgfdsazxcvbnm0987654321QAZXSWEDCVFRTGBNHYUJMKIOLP')
+     * @param mixed  $alphabet      (default: null)
      */
-    public function __construct($salt = '', $minHashLength = 0, $alphabet = 'qwertyuioplkjhgfdsazxcvbnm0987654321QAZXSWEDCVFRTGBNHYUJMKIOLP')
+    public function __construct($salt = '', $minHashLength = 0, $alphabet = null)
     {
         if ($minHashLength < $this->tokenLength) {
             $minHashLength = $this->tokenLength;
         }
 
+        if (empty($alphabet) || strlen($alphabet) < 26) {
+            $alphabet = $this->alphabet;
+        }
+
         $this->hashids = new Hashids($salt, $minHashLength, $alphabet);
     }
-    
+
     /**
-     * Generate array contains of random number.
+     * Get random number as code.
      *
      * @access public
-     * @param  int   $length (default: 6)
-     * @return array
+     * @param  int   $length   (default: 6)
+     * @param  bool  $toString (default: true)
+     * @return mixed
      */
-    public function randomNumberArray($length = 6)
+    public function getRandomCode($length = 6, $toString = true)
     {
         if ($length < 3) {
             $length = $this->codeLength;
         }
 
-        $results = [];
+        $codes = [];
 
         for ($i = 0; $i < $length; $i++) {
-            array_push($results, mt_rand(0, 9));
+            array_push($codes, mt_rand(0, 9));
         }
 
-        return $results;
+        if (! $toString) {
+            return $codes;
+        }
+
+        return $this->arrayToString($codes);
     }
 
     /**
-     * Generate token string.
+     * Generate token.
      *
      * @access public
-     * @param int $length (default: 6)
      */
-    public function generateToken($length = 6)
+    public function generateToken()
     {
-        $code = $this->randomNumberArray($length);
+        $codes = $this->getRandomCode($this->codeLength, false);
+
+        return $this->getTokenFromCode($codes);
+    }
+
+    /**
+     * Get token string from code.
+     *
+     * @access public
+     * @param  mixed  $code
+     * @return string
+     */
+    public function getTokenFromCode($code)
+    {
+        if (! is_array($code)) {
+            $code = str_split($code);
+        }
+
         array_push($code, Carbon::now()->getTimestamp());
 
         return $this->hashids->encode($code);
@@ -93,12 +128,28 @@ class Gembok
         $codes = $this->hashids->decode($token);
         array_pop($codes);
 
-        if ($toString) {
+        $codes = array_values($codes);
+
+        if (! $toString) {
             return $codes;
         }
 
-        return sprintf('%0'.count($codes).'d', implode('', $codes));
+        return $this->arrayToString($codes);
     }
 
-    
+    /**
+     * Convert array codes to string code.
+     *
+     * @access public
+     * @param  array  $array
+     * @return string
+     */
+    public function arrayToString($array)
+    {
+        if (! is_array($array)) {
+            return (string) $array;
+        }
+
+        return sprintf('%0'.count($array).'d', implode('', $array));
+    }
 }

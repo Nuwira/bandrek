@@ -2,7 +2,6 @@
 
 namespace Nuwira\Gembok\Password;
 
-use Illuminate\Support\Str;
 use Illuminate\Auth\Passwords\PasswordBrokerManager as BasePasswordBrokerManager;
 use InvalidArgumentException;
 
@@ -11,7 +10,7 @@ class PasswordBrokerManager extends BasePasswordBrokerManager
     /**
      * Resolve the given broker.
      *
-     * @param  string  $name
+     * @param  string                                    $name
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      *
      * @throws \InvalidArgumentException
@@ -32,20 +31,16 @@ class PasswordBrokerManager extends BasePasswordBrokerManager
             $this->app['auth']->createUserProvider($config['provider'])
         );
     }
-    
+
     /**
      * Create a token repository instance based on the given configuration.
      *
-     * @param  array  $config
+     * @param  array                                               $config
      * @return \Illuminate\Auth\Passwords\TokenRepositoryInterface
      */
     protected function createTokenRepository(array $config)
     {
-        $key = $this->app['config']['app.key'];
-
-        if (Str::startsWith($key, 'base64:')) {
-            $key = base64_decode(substr($key, 7));
-        }
+        $key = substr($this->app['config']['app.key'], 7);
 
         $connection = isset($config['connection']) ? $config['connection'] : null;
 
@@ -57,6 +52,4 @@ class PasswordBrokerManager extends BasePasswordBrokerManager
             $config['expire']
         );
     }
-    
-    
 }

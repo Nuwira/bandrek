@@ -32,4 +32,27 @@ class PasswordBroker extends BasePasswordBroker
 
         return static::RESET_LINK_SENT;
     }
+
+    /**
+     * Validate a password reset for the given credentials.
+     *
+     * @param  array                                       $credentials
+     * @return \Illuminate\Contracts\Auth\CanResetPassword
+     */
+    protected function validateReset(array $credentials)
+    {
+        if (is_null($user = $this->getUser($credentials))) {
+            return static::INVALID_USER;
+        }
+
+        if (! $this->validateNewPassword($credentials)) {
+            return static::INVALID_PASSWORD;
+        }
+
+        if (! $this->tokens->exists($user, $credentials['code'])) {
+            return static::INVALID_TOKEN;
+        }
+
+        return $user;
+    }
 }
