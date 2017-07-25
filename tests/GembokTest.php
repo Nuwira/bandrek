@@ -3,10 +3,10 @@
 namespace Nuwira\Gembok\Tests;
 
 use Carbon\Carbon;
-use GrahamCampbell\TestBench\AbstractPackageTestCase;
 use Nuwira\Gembok\Gembok;
+use PHPUnit\Framework\TestCase;
 
-class GembokTest extends AbstractPackageTestCase
+class GembokTest extends TestCase
 {
     public function setUp()
     {

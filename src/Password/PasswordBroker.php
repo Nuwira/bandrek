@@ -49,7 +49,7 @@ class PasswordBroker extends BasePasswordBroker
             return static::INVALID_PASSWORD;
         }
 
-        if (! $this->tokens->exists($user, $credentials['code'])) {
+        if (! $this->tokens->exists($user, $credentials['token'])) {
             return static::INVALID_TOKEN;
         }
 
