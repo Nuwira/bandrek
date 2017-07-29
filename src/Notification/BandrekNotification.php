@@ -3,11 +3,9 @@
 namespace Nuwira\Bandrek\Notification;
 
 use Config;
-use Nuwira\Bandrek\Bandrek;
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+use Nuwira\Bandrek\Bandrek;
 
 abstract class BandrekNotification extends Notification
 {
@@ -17,7 +15,7 @@ abstract class BandrekNotification extends Notification
      * @var string
      */
     public $token;
-    
+
     /**
      * The password reset code.
      *
@@ -39,7 +37,7 @@ abstract class BandrekNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function via($notifiable)
