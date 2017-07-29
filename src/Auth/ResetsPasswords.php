@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuwira\Gembok\Auth;
+namespace Nuwira\Bandrek\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

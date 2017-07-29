@@ -1,11 +1,11 @@
 <?php
 
-namespace Nuwira\Gembok\Auth;
+namespace Nuwira\Bandrek\Auth;
 
 use Illuminate\Foundation\Auth\User as BaseUser;
-use Nuwira\Gembok\Password\CanResetPassword;
+use Nuwira\Bandrek\Password\CanResetPassword;
 
-class User extends BaseUser
+abstract class User extends BaseUser
 {
     use CanResetPassword;
 }

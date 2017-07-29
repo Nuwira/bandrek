@@ -53,7 +53,7 @@ class DatabaseTokenRepositoryTest extends TestCase
         $query->shouldReceive('where')->once()->with('email', 'email')->andReturn($query);
         $query->shouldReceive('first')->andReturn(null);
 
-        $user = Mockery::mock('Illuminate\Contracts\Auth\CanResetPassword');
+        $user = $this->getUser();
         $user->shouldReceive('getEmailForPasswordReset')->andReturn('email');
 
         $this->assertFalse($repo->exists($user, 'token'));
@@ -73,7 +73,7 @@ class DatabaseTokenRepositoryTest extends TestCase
         $query->shouldReceive('where')->once()->with('email', 'email')->andReturn($query);
         $query->shouldReceive('first')->andReturn((object) ['created_at' => $date, 'token' => 'hashed-token']);
 
-        $user = Mockery::mock('Illuminate\Contracts\Auth\CanResetPassword');
+        $user = $this->getUser();
         $user->shouldReceive('getEmailForPasswordReset')->andReturn('email');
 
         $this->assertFalse($repo->exists($user, 'token'));
@@ -93,7 +93,7 @@ class DatabaseTokenRepositoryTest extends TestCase
         $query->shouldReceive('where')->once()->with('email', 'email')->andReturn($query);
         $query->shouldReceive('first')->andReturn((object) ['created_at' => $date, 'token' => 'hashed-token']);
 
-        $user = Mockery::mock('Illuminate\Contracts\Auth\CanResetPassword');
+        $user = $this->getUser();
         $user->shouldReceive('getEmailForPasswordReset')->andReturn('email');
 
         $this->assertFalse($repo->exists($user, 'wrong-token'));
@@ -113,7 +113,7 @@ class DatabaseTokenRepositoryTest extends TestCase
         $query->shouldReceive('where')->once()->with('email', 'email')->andReturn($query);
         $query->shouldReceive('first')->andReturn((object) ['created_at' => $date, 'token' => 'hashed-token']);
 
-        $user = Mockery::mock('Illuminate\Contracts\Auth\CanResetPassword');
+        $user = $this->getUser();
         $user->shouldReceive('getEmailForPasswordReset')->andReturn('email');
 
         $this->assertTrue($repo->exists($user, 'token'));
@@ -134,10 +134,15 @@ class DatabaseTokenRepositoryTest extends TestCase
         $query->shouldReceive('where')->once()->with('email', 'email')->andReturn($query);
         $query->shouldReceive('first')->andReturn((object) ['created_at' => $date, 'token' => 'hashed-token']);
 
-        $user = Mockery::mock('Illuminate\Contracts\Auth\CanResetPassword');
+        $user = $this->getUser();
         $user->shouldReceive('getEmailForPasswordReset')->andReturn('email');
 
         $this->assertTrue($repo->exists($user, '123456'));
+    }
+
+    protected function getUser()
+    {
+        return Mockery::mock('Nuwira\Bandrek\Auth\User');
     }
 
     protected function getRepo()
