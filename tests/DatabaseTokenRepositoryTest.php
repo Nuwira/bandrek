@@ -48,7 +48,7 @@ class DatabaseTokenRepositoryTest extends TestCase
     public function testExistReturnsFalseIfNoRowFoundForUser()
     {
         $repo = $this->getRepo();
-        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = Mockery::mock('stdClass'));
+        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = $this->getQuery());
 
         $query->shouldReceive('where')->once()->with('email', 'email')->andReturn($query);
         $query->shouldReceive('first')->andReturn(null);
@@ -66,7 +66,7 @@ class DatabaseTokenRepositoryTest extends TestCase
     {
         $repo = $this->getRepo();
         $repo->getHasher()->shouldReceive('check')->with('token', 'hashed-token')->andReturn(true);
-        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = Mockery::mock('stdClass'));
+        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = $this->getQuery());
 
         $date = Carbon::now()->subSeconds(300000)->toDateTimeString();
 
@@ -86,7 +86,7 @@ class DatabaseTokenRepositoryTest extends TestCase
     {
         $repo = $this->getRepo();
         $repo->getHasher()->shouldReceive('check')->with('wrong-token', 'hashed-token')->andReturn(false);
-        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = Mockery::mock('stdClass'));
+        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = $this->getQuery());
 
         $date = Carbon::now()->subMinutes(10)->toDateTimeString();
 
@@ -106,7 +106,7 @@ class DatabaseTokenRepositoryTest extends TestCase
     {
         $repo = $this->getRepo();
         $repo->getHasher()->shouldReceive('check')->with('token', 'hashed-token')->andReturn(true);
-        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = Mockery::mock('stdClass'));
+        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = $this->getQuery());
 
         $date = Carbon::now()->subMinutes(10)->toDateTimeString();
 
@@ -127,7 +127,7 @@ class DatabaseTokenRepositoryTest extends TestCase
         $repo = $this->getRepo();
         $repo->getBandrek()->shouldReceive('getTokenFromCode')->with('123456')->andReturn('token');
         $repo->getHasher()->shouldReceive('check')->with('token', 'hashed-token')->andReturn(true);
-        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = Mockery::mock('stdClass'));
+        $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = $this->getQuery());
 
         $date = Carbon::now()->subMinutes(10)->toDateTimeString();
 
@@ -138,6 +138,11 @@ class DatabaseTokenRepositoryTest extends TestCase
         $user->shouldReceive('getEmailForPasswordReset')->andReturn('email');
 
         $this->assertTrue($repo->exists($user, '123456'));
+    }
+
+    protected function getQuery()
+    {
+        return Mockery::mock('stdClass');
     }
 
     protected function getUser()
