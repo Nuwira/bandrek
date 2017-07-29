@@ -1,8 +1,8 @@
 <?php
 
-namespace Nuwira\Gembok;
+namespace Nuwira\Bandrek;
 
-interface GembokContract
+interface BandrekContract
 {
     public function getRandomCode($length = 6, $toString = true);
 

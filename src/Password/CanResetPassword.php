@@ -1,8 +1,8 @@
 <?php
 
-namespace Nuwira\Gembok\Password;
+namespace Nuwira\Bandrek\Password;
 
-use Nuwira\Gembok\Notification\ResetPassword as ResetPasswordNotification;
+use Nuwira\Bandrek\Notification\ResetPassword as ResetPasswordNotification;
 
 trait CanResetPassword
 {

@@ -1,9 +1,10 @@
 <?php
 
-namespace Nuwira\Gembok\Password;
+namespace Nuwira\Bandrek\Password;
 
 use Illuminate\Auth\Passwords\PasswordBrokerManager as BasePasswordBrokerManager;
 use InvalidArgumentException;
+use Nuwira\Bandrek\Bandrek;
 
 class PasswordBrokerManager extends BasePasswordBrokerManager
 {
@@ -50,6 +51,6 @@ class PasswordBrokerManager extends BasePasswordBrokerManager
             $config['table'],
             $key,
             $config['expire']
-        );
+        )->setBandrek(new Bandrek($key));
     }
 }

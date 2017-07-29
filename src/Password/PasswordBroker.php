@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuwira\Gembok\Password;
+namespace Nuwira\Bandrek\Password;
 
 use Illuminate\Auth\Passwords\PasswordBroker as BasePasswordBroker;
 

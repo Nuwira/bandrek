@@ -1,10 +1,10 @@
 <?php
 
-namespace Nuwira\Gembok;
+namespace Nuwira\Bandrek;
 
 use Hashids\Hashids;
 
-class Gembok implements GembokContract
+class Bandrek implements BandrekContract
 {
     /**
      * The length of random code generated
@@ -37,7 +37,7 @@ class Gembok implements GembokContract
     protected $alphabet = 'qwertyuioplkjhgfdsazxcvbnm0987654321QAZXSWEDCVFRTGBNHYUJMKIOLP';
 
     /**
-     * Create Gembok instance.
+     * Create Bandrek instance.
      *
      * @access public
      * @param string $salt          (default: '')

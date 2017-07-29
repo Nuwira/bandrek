@@ -1,11 +1,11 @@
 <?php
 
-namespace Nuwira\Gembok\Notification;
+namespace Nuwira\Bandrek\Notification;
 
 use Config;
 use Illuminate\Auth\Notifications\ResetPassword as BaseResetPassword;
 use Illuminate\Notifications\Messages\MailMessage;
-use Nuwira\Gembok\Gembok;
+use Nuwira\Bandrek\Bandrek;
 
 class ResetPassword extends BaseResetPassword
 {
@@ -52,6 +52,6 @@ class ResetPassword extends BaseResetPassword
     {
         $key = substr(Config::get('app.key'), 7);
 
-        return (new Gembok($key))->getCodeFromToken($token);
+        return (new Bandrek($key))->getCodeFromToken($token);
     }
 }

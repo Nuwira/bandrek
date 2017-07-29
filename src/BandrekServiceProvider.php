@@ -1,11 +1,11 @@
 <?php
 
-namespace Nuwira\Gembok;
+namespace Nuwira\Bandrek;
 
 use Illuminate\Auth\Passwords\PasswordResetServiceProvider as ServiceProvider;
-use Nuwira\Gembok\Password\PasswordBrokerManager;
+use Nuwira\Bandrek\Password\PasswordBrokerManager;
 
-class GembokServiceProvider extends ServiceProvider
+class BandrekServiceProvider extends ServiceProvider
 {
     protected function registerPasswordBroker()
     {
