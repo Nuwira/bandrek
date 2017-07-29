@@ -1,6 +1,6 @@
 {
-    "name": "nuwira/gembok",
-    "description": "Gembok is password token generation using number code.",
+    "name": "nuwira/bandrek",
+    "description": "Bandrek is password recovery token generation using number as code for Laravel 5.4.x based.",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Nuwira\\Gembok\\": "src/"
+            "Nuwira\\Bandrek\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nuwira\\Gembok\\Tests\\": "tests/"
+            "Nuwira\\Bandrek\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -34,7 +34,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Nuwira\\Gembok\\GembokServiceProvider"
+                "Nuwira\\Bandrek\\BandrekServiceProvider"
             ]
         }
     },
