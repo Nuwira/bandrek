@@ -1,5 +1,9 @@
 # Bandrek
 
+[![Build Status](https://travis-ci.org/Nuwira/bandrek.svg?branch=master)](https://travis-ci.org/Nuwira/bandrek)
+[![Total Download](https://img.shields.io/packagist/dt/nuwira/bandrek.svg)](https://packagist.org/packages/nuwira/bandrek)
+[![Latest Stable Version](https://img.shields.io/packagist/v/nuwira/bandrek.svg)](https://packagist.org/packages/nuwira/bandrek)
+
 > **Bandrek** is local word in Javanese that means a **lock pick**. We use lock pick to open a padlock if the key is lost.
 
 Bandrek replaces Laravel's password recovery manager to provide code and token when requesting password recovery. This code can be used as token replacement if you are using REST-API to reset password without visiting web interface.
