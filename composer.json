@@ -3,6 +3,12 @@
     "description": "Bandrek is password recovery token generation using number as code for Laravel 5.4.x based.",
     "type": "library",
     "license": "MIT",
+    "keywords":[  
+        "laravel",
+        "password",
+        "bandrek",
+        "nuwira"
+    ],
     "authors": [
         {
             "name": "Muhammad Zamroni",
