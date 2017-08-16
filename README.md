@@ -41,6 +41,15 @@ This is optional. To add Facade, add  `config/app.php` in the `aliases` section.
 'Bandrek' => Nuwira\Bandrek\BandrekFacade::class,
 ```
 
+If Facade is loaded, you can call these functions
+
+```php
+Bandrek::getRandomCode($length = 6, $toString = true);
+Bandrek::generateToken();
+Bandrek::getTokenFromCode($code);
+Bandrek::getCodeFromToken($token, $toString = true);
+```
+
 ### Model File
 
 To be able to send reset password instruction e-mail, open `app/User.php` (the user model file) and find this line.
