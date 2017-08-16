@@ -33,6 +33,14 @@ Comment or remove it and add that line to override Laravel's password reset hand
 Nuwira\Bandrek\BandrekServiceProvider::class
 ```
 
+### Add Facade
+
+This is optional. To add Facade, add  `config/app.php` in the `aliases` section.
+
+```php
+'Bandrek' => Nuwira\Bandrek\BandrekFacade::class,
+```
+
 ### Model File
 
 To be able to send reset password instruction e-mail, open `app/User.php` (the user model file) and find this line.
