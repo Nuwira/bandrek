@@ -14,7 +14,7 @@ The scenario is when user request password recovery via REST-API, the user can s
 
 ## Installation
 
-Bandrek only supports Laravel 5.4. To install using [Composer](https://getcomposer.org/), just run this command below.
+Bandrek only supports Laravel 5.4 and above. To install using [Composer](https://getcomposer.org/), just run this command below.
 
 ```bash
 composer require nuwira/bandrek
