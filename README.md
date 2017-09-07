@@ -110,7 +110,7 @@ class ResetPassword extends BandrekNotification
 ```php
 namespace App;
 
-use Nuwira\Gembok\Auth\User as BaseUser;
+use Nuwira\Bandrek\Auth\User as BaseUser;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends BaseUser
