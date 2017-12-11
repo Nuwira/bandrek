@@ -5,6 +5,7 @@ namespace Nuwira\Bandrek\Password;
 use Illuminate\Auth\Passwords\PasswordBrokerManager as BasePasswordBrokerManager;
 use InvalidArgumentException;
 use Nuwira\Bandrek\Bandrek;
+use Nuwira\Bandrek\Hasher;
 
 class PasswordBrokerManager extends BasePasswordBrokerManager
 {
@@ -47,7 +48,7 @@ class PasswordBrokerManager extends BasePasswordBrokerManager
 
         return (new DatabaseTokenRepository(
                 $this->app['db']->connection($connection),
-                $this->app['hash'],
+                new Hasher(new Bandrek($key)),
                 $config['table'],
                 $key,
                 $config['expire']
