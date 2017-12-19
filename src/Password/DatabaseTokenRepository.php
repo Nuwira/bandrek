@@ -2,6 +2,7 @@
 
 namespace Nuwira\Bandrek\Password;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Passwords\DatabaseTokenRepository as BaseDatabaseTokenRepository;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Nuwira\Bandrek\BandrekContract;
@@ -70,5 +71,17 @@ class DatabaseTokenRepository extends BaseDatabaseTokenRepository
     public function getBandrek()
     {
         return $this->bandrek;
+    }
+
+    /**
+     * Build the record payload for the table.
+     *
+     * @param  string $email
+     * @param  string $token
+     * @return array
+     */
+    protected function getPayload($email, $token)
+    {
+        return ['email' => $email, 'token' => $token, 'created_at' => new Carbon()];
     }
 }
