@@ -40,10 +40,6 @@ class DatabaseTokenRepository extends BaseDatabaseTokenRepository
             'email', $user->getEmailForPasswordReset()
         )->first();
 
-        if (preg_match('/[0-9]{6}/', $token)) {
-            $token = $this->getBandrek()->getTokenFromCode($token);
-        }
-
         return $record &&
                ! $this->tokenExpired($record['created_at']) &&
                  $this->hasher->check($token, $record['token']);
