@@ -125,7 +125,6 @@ class DatabaseTokenRepositoryTest extends TestCase
     public function testExistReturnsTrueIfValidRecordExistsUsingCode()
     {
         $repo = $this->getRepo();
-        $repo->getBandrek()->shouldReceive('getTokenFromCode')->with('123456')->andReturn('token');
         $repo->getHasher()->shouldReceive('check')->with('token', 'hashed-token')->andReturn(true);
         $repo->getConnection()->shouldReceive('table')->once()->with('table')->andReturn($query = $this->getQuery());
 
@@ -137,7 +136,7 @@ class DatabaseTokenRepositoryTest extends TestCase
         $user = $this->getUser();
         $user->shouldReceive('getEmailForPasswordReset')->andReturn('email');
 
-        $this->assertTrue($repo->exists($user, '123456'));
+        $this->assertTrue($repo->exists($user, 'token'));
     }
 
     protected function getQuery()
