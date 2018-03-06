@@ -40,7 +40,7 @@ class DatabaseTokenRepository extends BaseDatabaseTokenRepository
             'email', $user->getEmailForPasswordReset()
         )->first();
 
-        return $record &&
+    return ! empty($record) &&
                ! $this->tokenExpired($record['created_at']) &&
                  $this->hasher->check($token, $record['token']);
     }

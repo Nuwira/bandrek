@@ -46,15 +46,15 @@ class Bandrek implements BandrekContract
      */
     public function __construct($salt = '', $minHashLength = 0, $alphabet = null)
     {
-        if ($minHashLength < $this->tokenLength) {
-            $minHashLength = $this->tokenLength;
+        if ($minHashLength > 0 && $minHashLength >= $this->tokenLength) {
+            $this->tokenLength = $minHashLength;
         }
 
-        if (empty($alphabet) || strlen($alphabet) < 26) {
-            $alphabet = $this->alphabet;
+        if (! empty($alphabet) && strlen($alphabet) >= 26) {
+            $this->alphabet = $alphabet;
         }
 
-        $this->hashids = new Hashids($salt, $minHashLength, $alphabet);
+        $this->hashids = new Hashids($salt, $this->tokenLength, $this->alphabet);
     }
 
     /**
@@ -147,5 +147,26 @@ class Bandrek implements BandrekContract
         }
 
         return sprintf('%0'.count($array).'d', implode('', $array));
+    }
+
+    /**
+     * Get hasher information.
+     *
+     * @param  string $token
+     * @return array
+     */
+    public function getInfo($token)
+    {
+        $code = $this->getCodeFromToken($token, true);
+
+        return [
+            'algo' => 0,
+            'algoName' => 'bandrek',
+            'options' => [
+                'code' => strlen($code),
+                'token' => $this->tokenLength,
+                'keys' => strlen($this->alphabet),
+            ],
+        ];
     }
 }

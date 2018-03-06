@@ -14,12 +14,12 @@ class Hasher implements HasherContract
     /**
      * Get information about the given hashed value.
      *
-     * @param  string  $hashedValue
+     * @param  string $hashedValue
      * @return array
      */
     public function info($hashedValue)
     {
-        return password_get_info($hashedValue);
+        return $this->bandrek->getInfo($hashedValue);
     }
 
     /**
@@ -44,8 +44,8 @@ class Hasher implements HasherContract
      */
     public function check($value, $hashedValue, array $options = [])
     {
-        return $this->bandrek->getCodeFromToken($value)
-            == $this->bandrek->getCodeFromToken($hashedValue);
+        return $this->bandrek->getCodeFromToken($hashedValue, true)
+            == (string) $value;
     }
 
     /**
@@ -57,6 +57,8 @@ class Hasher implements HasherContract
      */
     public function needsRehash($hashedValue, array $options = [])
     {
+        $value = $this->bandrek->getCodeFromToken($hashedValue);
+
         return $this->bandrek->getTokenFromCode($value);
     }
 }
